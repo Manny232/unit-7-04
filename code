@@ -1,10 +1,4 @@
------------------------------------------------------------------------------------------
---
--- main.lua
---
------------------------------------------------------------------------------------------
-
--- Jump
+display.setDefault( "background",0, 255, 204)
 
 local physics = require( "physics" )
 
@@ -12,7 +6,7 @@ physics.start()
 physics.setGravity( 0, 25 ) -- ( x, y )
 physics.setDrawMode( "hybrid" )   -- Shows collision engine outlines only
 
-local leftWall = display.newRect( 0, display.contentHeight / 2, 1, display.contentHeight )
+local leftWall = display.newRect( 0,display.contentHeight / 2, 1, display.contentHeight )
 -- myRectangle.strokeWidth = 3
 -- myRectangle:setFillColor( 0.5 )
 -- myRectangle:setStrokeColor( 1, 0, 0 )
@@ -22,7 +16,17 @@ physics.addBody( leftWall, "static", {
     bounce = 0.3 
     } )
 
-local theGround1 = display.newImage( "./assets/sprites/land.png" )
+local rightWall = display.newRect( 0, display.contentHeight / 2, 1, display.contentHeight )
+rightWall.x = display.contentCenterX +150
+rightWall.y = display.contentHeight
+rightWallid = "rightWall"
+rightWall.alpha = 0.0
+physics.addBody( rightWall, "static", { 
+    friction = 0.5, 
+    bounce = 0.3 
+    } )
+
+local theGround1 = display.newImage( "land.png" )
 theGround1.x = 520
 theGround1.y = display.contentHeight
 theGround1.id = "the ground 1"
@@ -31,8 +35,8 @@ physics.addBody( theGround1, "static", {
     bounce = 0.3 
     } )
 
-local theCharacter = display.newImage( "./assets/sprites/Idle.png" )
-theCharacter.x = display.contentCenterX - 200
+local theCharacter = display.newImageRect( "Idle.png" , 100, 100 )
+theCharacter.x = display.contentCenterX - 100
 theCharacter.y = display.contentCenterY
 theCharacter.id = "the character"
 physics.addBody( theCharacter, "dynamic", { 
@@ -42,34 +46,34 @@ physics.addBody( theCharacter, "dynamic", {
     } )
 theCharacter.isFixedRotation = true -- If you apply this property before the physics.addBody() command for the object, it will merely be treated as a property of the object like any other custom property and, in that case, it will not cause any physical change in terms of locking rotation.
 
-local dPad = display.newImage( "d-pad.png" )
+local dPad = display.newImageRect( "d-pad.png" , 100 ,100)
 dPad.x = 150
 dPad.y = display.contentHeight - 80
 dPad.alpha = 0.50
 dPad.id = "d-pad"
 
-local upArrow = display.newImage( "upArrow.png" )
+local upArrow = display.newImageRect( "upArrow.png" ,25 ,25)
 upArrow.x = 150
-upArrow.y = display.contentHeight - 190
+upArrow.y = display.contentHeight - 120
 upArrow.id = "up arrow"
 
-local downArrow = display.newImage( "downArrow.png" )
+local downArrow = display.newImageRect( "downArrow.png" ,25 ,25)
 downArrow.x = 150
-downArrow.y = display.contentHeight + 28
+downArrow.y = display.contentHeight -45
 downArrow.id = "down arrow"
 
-local leftArrow = display.newImage( "leftArrow.png" )
-leftArrow.x = 40
+local leftArrow = display.newImageRect( "leftArrow.png" ,25 ,25)
+leftArrow.x = 110
 leftArrow.y = display.contentHeight - 80
 leftArrow.id = "left arrow"
 
-local rightArrow = display.newImage( "rightArrow.png" )
-rightArrow.x = 260
+local rightArrow = display.newImageRect( "rightArrow.png",25 ,25)
+rightArrow.x = 190
 rightArrow.y = display.contentHeight - 80
 rightArrow.id = "right arrow"
 
-local jumpButton = display.newImage( "jumpButton.png" )
-jumpButton.x = display.contentWidth - 80
+local jumpButton = display.newImageRect( "jumpButton.png" ,25 ,25)
+jumpButton.x = display.contentWidth -170
 jumpButton.y = display.contentHeight - 80
 jumpButton.id = "jump button"
 jumpButton.alpha = 0.5
